@@ -1,17 +1,22 @@
 createNav(createElem);
 createWrapper(createElem);
+createLogo(createElem);
 createNavLinks(createElem);
+createLogin(createElem);
 
 function createElem(parentElem, type, className, content) {
   const newElem = document.createElement(type);
   newElem.innerText = content;
-  for (let i = 0; i < className.length; i++) {
-    newElem.classList.add(className[i]);
+  if (className) {
+    for (let i = 0; i < className.length; i++) {
+      newElem.classList.add(className[i]);
+    }
   }
 
   parentElem.appendChild(newElem);
   return newElem;
 }
+
 function createWrapper(createElem) {
   const parentElem = document.querySelector('.nav__block');
   const type = 'div';
@@ -53,4 +58,32 @@ function createNavLinks(createElem) {
     const contentA = arrLinks[i];
     createElem(li, typeA, classNameA, contentA);
   }
+}
+function createLogo(createElem) {
+  const parentContainer = document.querySelector('.nav__container');
+  const typeDiv = 'div';
+  const classNameDiv = ['nav__logo'];
+  const contentDiv = null;
+  const typeI = 'i';
+  const classNameI = ['ph', 'ph-fork-knife'];
+  const contentI = '';
+  createElem(parentContainer, typeDiv, classNameDiv, contentDiv);
+  const divLogo = document.querySelector('.nav__logo');
+  createElem(divLogo, typeI, classNameI, contentI);
+  const typeP = 'p';
+  const classNameP = null;
+  const contentP = 'COOK';
+  createElem(divLogo, typeP, classNameP, contentP);
+}
+function createLogin(createElem) {
+  const parentContainer = document.querySelector('.nav__container');
+  const typeDiv = 'div';
+  const classNameDiv = ['nav__login'];
+  const contentDiv = null;
+  const typeI = 'i';
+  const classNameI = ['ph', 'ph-user'];
+  const contentI = '';
+  createElem(parentContainer, typeDiv, classNameDiv, contentDiv);
+  const divLogin = document.querySelector('.nav__login');
+  createElem(divLogin, typeI, classNameI, contentI);
 }
