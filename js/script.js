@@ -10,6 +10,7 @@ function createElem(parentElem, type, className, content) {
   }
 
   parentElem.appendChild(newElem);
+  return newElem;
 }
 function createWrapper(createElem) {
   const parentElem = document.querySelector('.nav__block');
@@ -25,17 +26,31 @@ function createNav(createElem) {
   const content = null;
   createElem(parentElem, type, className, content);
 }
-function createListElem(createElem) {
-  const parentElem = document.querySelector('.nav__container');
-  const type = 'li';
-  const className = ['nav__list'];
-  const content = null;
-  createElem(parentElem, type, className, content);
-}
+
 function createNavLinks(createElem) {
   const parentElem = document.querySelector('.nav__container');
-  const type = 'ul';
-  const className = ['nav', 'justify-content-end'];
-  const content = null;
-  createElem(parentElem, type, className, content);
+  const typeParent = 'ul';
+  const classNameParent = ['nav__list'];
+  const contentParent = null;
+
+  createElem(parentElem, typeParent, classNameParent, contentParent);
+  const ul = document.querySelector('.nav__list');
+  const arrLinks = [
+    'Home',
+    'Recipe',
+    'Categories',
+    'Surprise Me',
+    'Saved Recipe',
+  ];
+  for (let i = 0; i < arrLinks.length; i++) {
+    const typeLi = 'li';
+    const classNameLi = ['nav__item'];
+    const contentLi = null;
+    createElem(ul, typeLi, classNameLi, contentLi);
+    const li = document.querySelectorAll('.nav__item')[i];
+    const typeA = 'a';
+    const classNameA = ['nav__link'];
+    const contentA = arrLinks[i];
+    createElem(li, typeA, classNameA, contentA);
+  }
 }
