@@ -3,11 +3,20 @@ createWrapper();
 createLogo();
 createNavLinks();
 createLogin();
+createMainBlock();
+createMainRecipeNewSection();
 
 function createElem(parentElem, options) {
-  const { type, className, content } = options;
+  const { type, className, content, href } = options;
   const newElem = document.createElement(type);
-  newElem.innerText = content;
+
+  if (content) {
+    newElem.innerText = content;
+  }
+
+  if (href) {
+    newElem.setAttribute('href', href);
+  }
   if (className) {
     newElem.classList.add(...className);
   }
@@ -20,7 +29,6 @@ function createWrapper() {
   const options = {
     type: 'div',
     className: ['container', 'nav__container'],
-    content: '',
   };
   const parentElem = document.querySelector('.nav__block');
   createElem(parentElem, options);
@@ -30,7 +38,6 @@ function createNav() {
   const options = {
     type: 'nav',
     className: ['nav__block'],
-    content: '',
   };
   createElem(parentElem, options);
 }
@@ -40,7 +47,6 @@ function createNavLinks() {
   const optionsUl = {
     type: 'ul',
     className: ['nav__list'],
-    content: '',
   };
 
   createElem(parentElem, optionsUl);
@@ -56,7 +62,6 @@ function createNavLinks() {
     const optionsLi = {
       type: 'li',
       className: ['nav__item'],
-      content: '',
     };
     createElem(ul, optionsLi);
     const li = document.querySelectorAll('.nav__item')[i];
@@ -74,16 +79,14 @@ function createLogo() {
   const optionsDiv = {
     type: 'div',
     className: ['nav__logo'],
-    content: '',
   };
   const optionsI = {
     type: 'i',
     className: ['ph', 'ph-fork-knife'],
-    content: '',
   };
   const optionsP = {
     type: 'p',
-    className: '',
+
     content: 'COOK',
   };
   createElem(parentContainer, optionsDiv);
@@ -96,15 +99,41 @@ function createLogin() {
   const optionsDiv = {
     type: 'div',
     className: ['nav__login'],
-    content: '',
   };
   const optionsI = {
     type: 'i',
     className: ['ph', 'ph-user'],
-    content: '',
   };
 
   createElem(parentContainer, optionsDiv);
   const divLogin = document.querySelector('.nav__login');
   createElem(divLogin, optionsI);
+}
+function createMainBlock() {
+  const parentElem = document.querySelector('.wrapper');
+  const options = {
+    type: 'main',
+    className: ['main'],
+  };
+  createElem(parentElem, options);
+  const parentElemMain = document.querySelector('.main');
+  const optionsContainer = {
+    type: 'div',
+    className: ['container', 'main__container'],
+  };
+  createElem(parentElemMain, optionsContainer);
+}
+function createMainRecipeNewSection() {
+  const parentElem = document.querySelector('.main__container');
+  const options = {
+    type: 'section',
+    className: ['new'],
+  };
+  createElem(parentElem, options);
+  const parentElemItemsBlock = document.querySelector('.new');
+  const optionsItemsBlock = {
+    type: 'div',
+    className: ['new__items'],
+  };
+  createElem(parentElemItemsBlock, optionsItemsBlock);
 }
