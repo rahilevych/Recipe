@@ -1,5 +1,23 @@
-* {
+:root {
+  --main-bg-color: #d2c6c2;
+  --main-font-color: white;
+}
+*,
+a,
+p,
+ul {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  list-style: none;
+  font-family: 'Josefin Sans', sans-serif;
+  font-style: normal;
+  color: var(--main-font-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1440px) {
+  html {
+    font-size: 14px;
+  }
 }

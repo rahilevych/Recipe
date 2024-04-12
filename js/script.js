@@ -1,44 +1,49 @@
-createNav(createElem);
-createWrapper(createElem);
-createLogo(createElem);
-createNavLinks(createElem);
-createLogin(createElem);
+createNav();
+createWrapper();
+createLogo();
+createNavLinks();
+createLogin();
 
-function createElem(parentElem, type, className, content) {
+function createElem(parentElem, options) {
+  const { type, className, content } = options;
   const newElem = document.createElement(type);
   newElem.innerText = content;
   if (className) {
-    for (let i = 0; i < className.length; i++) {
-      newElem.classList.add(className[i]);
-    }
+    newElem.classList.add(...className);
   }
 
   parentElem.appendChild(newElem);
   return newElem;
 }
 
-function createWrapper(createElem) {
+function createWrapper() {
+  const options = {
+    type: 'div',
+    className: ['container', 'nav__container'],
+    content: '',
+  };
   const parentElem = document.querySelector('.nav__block');
-  const type = 'div';
-  const className = ['container', 'nav__container'];
-  const content = null;
-  createElem(parentElem, type, className, content);
+  createElem(parentElem, options);
 }
-function createNav(createElem) {
+function createNav() {
   const parentElem = document.querySelector('.wrapper');
-  const type = 'nav';
-  const className = ['nav__block'];
-  const content = null;
-  createElem(parentElem, type, className, content);
+  const options = {
+    type: 'nav',
+    className: ['nav__block'],
+    content: '',
+  };
+  createElem(parentElem, options);
 }
 
-function createNavLinks(createElem) {
+function createNavLinks() {
   const parentElem = document.querySelector('.nav__container');
-  const typeParent = 'ul';
-  const classNameParent = ['nav__list'];
-  const contentParent = null;
+  const optionsUl = {
+    type: 'ul',
+    className: ['nav__list'],
+    content: '',
+  };
 
-  createElem(parentElem, typeParent, classNameParent, contentParent);
+  createElem(parentElem, optionsUl);
   const ul = document.querySelector('.nav__list');
   const arrLinks = [
     'Home',
@@ -48,42 +53,58 @@ function createNavLinks(createElem) {
     'Saved Recipe',
   ];
   for (let i = 0; i < arrLinks.length; i++) {
-    const typeLi = 'li';
-    const classNameLi = ['nav__item'];
-    const contentLi = null;
-    createElem(ul, typeLi, classNameLi, contentLi);
+    const optionsLi = {
+      type: 'li',
+      className: ['nav__item'],
+      content: '',
+    };
+    createElem(ul, optionsLi);
     const li = document.querySelectorAll('.nav__item')[i];
-    const typeA = 'a';
-    const classNameA = ['nav__link'];
-    const contentA = arrLinks[i];
-    createElem(li, typeA, classNameA, contentA);
+    const optionsA = {
+      type: 'a',
+      className: ['nav__link'],
+      content: arrLinks[i],
+    };
+
+    createElem(li, optionsA);
   }
 }
-function createLogo(createElem) {
+function createLogo() {
   const parentContainer = document.querySelector('.nav__container');
-  const typeDiv = 'div';
-  const classNameDiv = ['nav__logo'];
-  const contentDiv = null;
-  const typeI = 'i';
-  const classNameI = ['ph', 'ph-fork-knife'];
-  const contentI = '';
-  createElem(parentContainer, typeDiv, classNameDiv, contentDiv);
+  const optionsDiv = {
+    type: 'div',
+    className: ['nav__logo'],
+    content: '',
+  };
+  const optionsI = {
+    type: 'i',
+    className: ['ph', 'ph-fork-knife'],
+    content: '',
+  };
+  const optionsP = {
+    type: 'p',
+    className: '',
+    content: 'COOK',
+  };
+  createElem(parentContainer, optionsDiv);
   const divLogo = document.querySelector('.nav__logo');
-  createElem(divLogo, typeI, classNameI, contentI);
-  const typeP = 'p';
-  const classNameP = null;
-  const contentP = 'COOK';
-  createElem(divLogo, typeP, classNameP, contentP);
+  createElem(divLogo, optionsI);
+  createElem(divLogo, optionsP);
 }
-function createLogin(createElem) {
+function createLogin() {
   const parentContainer = document.querySelector('.nav__container');
-  const typeDiv = 'div';
-  const classNameDiv = ['nav__login'];
-  const contentDiv = null;
-  const typeI = 'i';
-  const classNameI = ['ph', 'ph-user'];
-  const contentI = '';
-  createElem(parentContainer, typeDiv, classNameDiv, contentDiv);
+  const optionsDiv = {
+    type: 'div',
+    className: ['nav__login'],
+    content: '',
+  };
+  const optionsI = {
+    type: 'i',
+    className: ['ph', 'ph-user'],
+    content: '',
+  };
+
+  createElem(parentContainer, optionsDiv);
   const divLogin = document.querySelector('.nav__login');
-  createElem(divLogin, typeI, classNameI, contentI);
+  createElem(divLogin, optionsI);
 }
