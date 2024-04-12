@@ -7,7 +7,7 @@ createMainBlock();
 createMainRecipeNewSection();
 
 function createElem(parentElem, options) {
-  const { type, className, content, href } = options;
+  const { type, className, content, href, src } = options;
   const newElem = document.createElement(type);
 
   if (content) {
@@ -16,6 +16,9 @@ function createElem(parentElem, options) {
 
   if (href) {
     newElem.setAttribute('href', href);
+  }
+  if (src) {
+    newElem.setAttribute('src', src);
   }
   if (className) {
     newElem.classList.add(...className);
@@ -136,4 +139,49 @@ function createMainRecipeNewSection() {
     className: ['new__items'],
   };
   createElem(parentElemItemsBlock, optionsItemsBlock);
+  for (let i = 0; i < 4; i++) {
+    createCard(i);
+  }
+}
+function createCard(i) {
+  const parentElem = document.querySelector('.new__items');
+  const options = {
+    type: 'div',
+    className: ['new__item'],
+  };
+  createElem(parentElem, options);
+  const parentElemDiv = document.querySelectorAll('.new__item')[i];
+  const optionsDiv = {
+    type: 'div',
+    className: ['new__img'],
+  };
+  createElem(parentElemDiv, optionsDiv);
+  const parentElemImg = document.querySelectorAll('.new__img')[i];
+  const optionsImg = {
+    type: 'img',
+    src: 'https://danielfooddiary.com/wp-content/uploads/2020/04/beiing.jpg',
+  };
+  createElem(parentElemImg, optionsImg);
+  const parentElemTitle = document.querySelectorAll('.new__item')[i];
+  const optionsTitle = {
+    type: 'p',
+    className: ['new__title'],
+    content: 'Title',
+  };
+  createElem(parentElemTitle, optionsTitle);
+  const parentElemDeskr = document.querySelectorAll('.new__item')[i];
+  const optionsDeskr = {
+    type: 'p',
+    className: ['new__deskr'],
+    content:
+      'Lrem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text everscrambled it to make a type specimen book.',
+  };
+  createElem(parentElemDeskr, optionsDeskr);
+  const parentElemBtn = document.querySelectorAll('.new__item')[i];
+  const optionsBtn = {
+    type: 'a',
+    className: ['new__btn'],
+    content: 'READ MORE',
+  };
+  createElem(parentElemBtn, optionsBtn);
 }
