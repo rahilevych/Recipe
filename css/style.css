@@ -1,6 +1,6 @@
 .wrapper {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   border: 1px solid black;
 }
 .container {
@@ -46,4 +46,59 @@
   height: 100%;
   font-size: 1.5rem;
   align-self: flex-end;
+}
+main {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+.new {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  width: 100%;
+  height: 100%;
+}
+.new__items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  gap: 3rem;
+}
+.new__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  width: 20rem;
+  height: 34rem;
+  border: 1px solid black;
+}
+.new__img {
+  width: 100%;
+  height: 16rem;
+}
+.new__img img {
+  width: 100%;
+  height: 100%;
+}
+.new__title {
+  color: black;
+}
+.new__deskr {
+  width: 90%;
+  color: black;
+}
+.new__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  border: 1px solid black;
+  height: 3.125rem;
+  width: 60%;
 }
