@@ -1,10 +1,11 @@
+import * as keyAPI from '../config/keyAPI.js';
 createNav();
 createWrapper();
 createLogo();
 createNavLinks();
 createLogin();
 createMainBlock();
-createMainRecipeNewSection();
+//createMainRecipeNewSection();
 
 function createElem(parentElem, options) {
   const { type, className, content, href, src } = options;
@@ -126,7 +127,7 @@ function createMainBlock() {
   };
   createElem(parentElemMain, optionsContainer);
 }
-function createMainRecipeNewSection() {
+function createMainRecipeNewSection(data) {
   const parentElem = document.querySelector('.main__container');
   const options = {
     type: 'section',
@@ -139,11 +140,11 @@ function createMainRecipeNewSection() {
     className: ['new__items'],
   };
   createElem(parentElemItemsBlock, optionsItemsBlock);
-  for (let i = 0; i < 4; i++) {
-    createCard(i);
+  for (let i = 0; i < data.hits.length; i++) {
+    createCard(i, data);
   }
 }
-function createCard(i) {
+function createCard(i, data) {
   const parentElem = document.querySelector('.new__items');
   const options = {
     type: 'div',
@@ -159,14 +160,14 @@ function createCard(i) {
   const parentElemImg = document.querySelectorAll('.new__img')[i];
   const optionsImg = {
     type: 'img',
-    src: 'https://danielfooddiary.com/wp-content/uploads/2020/04/beiing.jpg',
+    src: data.hits[i].recipe.image,
   };
   createElem(parentElemImg, optionsImg);
   const parentElemTitle = document.querySelectorAll('.new__item')[i];
   const optionsTitle = {
     type: 'p',
     className: ['new__title'],
-    content: 'Title',
+    content: data.hits[i].recipe.label,
   };
   createElem(parentElemTitle, optionsTitle);
   const parentElemDeskr = document.querySelectorAll('.new__item')[i];
@@ -185,3 +186,16 @@ function createCard(i) {
   };
   createElem(parentElemBtn, optionsBtn);
 }
+async function getRecipeFromAPI(key, id) {
+  const url = `https://api.edamam.com/search?q=chicken&app_id=${id}&app_key=${key}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    createMainRecipeNewSection(data);
+  } catch (error) {}
+}
+function getData(data) {
+  console.log(data);
+}
+getRecipeFromAPI(keyAPI.key, keyAPI.id);
