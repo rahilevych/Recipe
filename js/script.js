@@ -1,4 +1,5 @@
 import * as keyAPI from '../config/keyAPI.js';
+import { createElem } from './createElem.js';
 createNav();
 createWrapper();
 createLogo();
@@ -6,28 +7,6 @@ createNavLinks();
 createLogin();
 createMainBlock();
 //createMainRecipeNewSection();
-
-function createElem(parentElem, options) {
-  const { type, className, content, href, src } = options;
-  const newElem = document.createElement(type);
-
-  if (content) {
-    newElem.innerText = content;
-  }
-
-  if (href) {
-    newElem.setAttribute('href', href);
-  }
-  if (src) {
-    newElem.setAttribute('src', src);
-  }
-  if (className) {
-    newElem.classList.add(...className);
-  }
-
-  parentElem.appendChild(newElem);
-  return newElem;
-}
 
 function createWrapper() {
   const options = {
@@ -127,6 +106,75 @@ function createMainBlock() {
   };
   createElem(parentElemMain, optionsContainer);
 }
+
+function createMainCategorySection(categoriesWithImages) {
+  const parentElem = document.querySelector('.main__container');
+  const options = {
+    type: 'section',
+    className: ['popular-categories'],
+  };
+  createElem(parentElem, options);
+  const parentElemItemsTitle = document.querySelector('.popular-categories');
+  const optionsItemsTitle = {
+    type: 'h2',
+    className: ['title'],
+    content: 'Popular Categories',
+  };
+  createElem(parentElemItemsTitle, optionsItemsTitle);
+  const parentElemItemsBlock = document.querySelector('.popular-categories');
+  const optionsItemsBlock = {
+    type: 'div',
+    className: ['popular-categories__block'],
+  };
+  createElem(parentElemItemsBlock, optionsItemsBlock);
+  for (let i = 0; i < 8; i++) {
+    createCategory(i, categoriesWithImages);
+  }
+}
+function createCategory(i, categoriesWithImages) {
+  const parentElem = document.querySelector('.popular-categories__block');
+  const options = {
+    type: 'a',
+    className: ['popular-categories__item'],
+  };
+  createElem(parentElem, options);
+
+  const parentElemImg = document.querySelectorAll('.popular-categories__item')[
+    i
+  ];
+  const optionsImg = {
+    type: 'img',
+    src: categoriesWithImages[i].image,
+  };
+  createElem(parentElemImg, optionsImg);
+  const parentElemTitle = document.querySelectorAll(
+    '.popular-categories__item'
+  )[i];
+  const optionsTitle = {
+    type: 'p',
+    className: ['.popular-categories__title'],
+    content: categoriesWithImages[i].category,
+  };
+  createElem(parentElemTitle, optionsTitle);
+}
+async function getPopularCategoryFromAPI(key) {
+  const url = 'https://all-in-one-recipe-api.p.rapidapi.com/categories';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': key,
+      'X-RapidAPI-Host': 'all-in-one-recipe-api.p.rapidapi.com',
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 function createMainRecipeNewSection(data) {
   const parentElem = document.querySelector('.main__container');
   const options = {
@@ -134,13 +182,20 @@ function createMainRecipeNewSection(data) {
     className: ['new'],
   };
   createElem(parentElem, options);
+  const parentElemItemsTitle = document.querySelector('.new');
+  const optionsItemsTitle = {
+    type: 'h2',
+    className: ['title'],
+    content: 'Try something new',
+  };
+  createElem(parentElemItemsTitle, optionsItemsTitle);
   const parentElemItemsBlock = document.querySelector('.new');
   const optionsItemsBlock = {
     type: 'div',
     className: ['new__items'],
   };
   createElem(parentElemItemsBlock, optionsItemsBlock);
-  for (let i = 0; i < data.hits.length; i++) {
+  for (let i = 0; i < 12; i++) {
     createCard(i, data);
   }
 }
@@ -160,22 +215,21 @@ function createCard(i, data) {
   const parentElemImg = document.querySelectorAll('.new__img')[i];
   const optionsImg = {
     type: 'img',
-    src: data.hits[i].recipe.image,
+    src: data.recipes[i].image,
   };
   createElem(parentElemImg, optionsImg);
   const parentElemTitle = document.querySelectorAll('.new__item')[i];
   const optionsTitle = {
     type: 'p',
     className: ['new__title'],
-    content: data.hits[i].recipe.label,
+    content: data.recipes[i].title,
   };
   createElem(parentElemTitle, optionsTitle);
   const parentElemDeskr = document.querySelectorAll('.new__item')[i];
   const optionsDeskr = {
     type: 'p',
     className: ['new__deskr'],
-    content:
-      'Lrem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text everscrambled it to make a type specimen book.',
+    content: limitCharacters(removeHtmlTags(data.recipes[i].summary), 200),
   };
   createElem(parentElemDeskr, optionsDeskr);
   const parentElemBtn = document.querySelectorAll('.new__item')[i];
@@ -187,15 +241,42 @@ function createCard(i, data) {
   createElem(parentElemBtn, optionsBtn);
 }
 async function getRecipeFromAPI(key, id) {
-  const url = `https://api.edamam.com/search?q=chicken&app_id=${id}&app_key=${key}`;
+  //const url = `https://api.edamam.com/search?q=chicken&app_id=${id}&app_key=${key}`;
+  //const limit = 9; // Здесь указываете желаемое количество рецептов
+  const url = `https://api.spoonacular.com/recipes/random?number=1000&apiKey=${key}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
     createMainRecipeNewSection(data);
+    /*const categoriesWithImages = [];
+    const uniqueCategories = new Set();
+
+    for (let i = 0; i < data.recipes.length; i++) {
+      const recipe = data.recipes[i];
+      recipe.dishTypes.forEach((category) => {
+        if (!uniqueCategories.has(category)) {
+          uniqueCategories.add(category);
+          categoriesWithImages.push({
+            category: category,
+            image: recipe.image,
+          });
+        }
+      });
+    }
+    createMainCategorySection(categoriesWithImages);*/
+    //  console.log(categoriesWithImages);
   } catch (error) {}
 }
-function getData(data) {
-  console.log(data);
+function limitCharacters(input, limit) {
+  if (input.length > limit) {
+    return input.slice(0, limit) + '...';
+  }
+  return input;
 }
-getRecipeFromAPI(keyAPI.key, keyAPI.id);
+
+function removeHtmlTags(input) {
+  return input.replace(/<[^>]*>?/gm, '');
+}
+getRecipeFromAPI(keyAPI.key);
+//getPopularCategoryFromAPI(keyAPI.key);
