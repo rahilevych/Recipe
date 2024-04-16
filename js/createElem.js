@@ -1,5 +1,17 @@
 export function createElem(parentElem, options) {
-  const { type, className, content, href, src } = options;
+  const {
+    type,
+    className,
+    content,
+    href,
+    src,
+    forAttribute,
+    typeAttr,
+    id,
+    nameAttr,
+    placeholder,
+    value,
+  } = options;
   const newElem = document.createElement(type);
 
   if (content) {
@@ -11,6 +23,24 @@ export function createElem(parentElem, options) {
   }
   if (src) {
     newElem.setAttribute('src', src);
+  }
+  if (forAttribute) {
+    newElem.setAttribute('for', forAttribute);
+  }
+  if (typeAttr) {
+    newElem.setAttribute('type', typeAttr);
+  }
+  if (nameAttr) {
+    newElem.setAttribute('name', nameAttr);
+  }
+  if (id) {
+    newElem.setAttribute('id', id);
+  }
+  if (value) {
+    newElem.setAttribute('value', value);
+  }
+  if (placeholder) {
+    newElem.setAttribute('placeholder', placeholder);
   }
   if (className) {
     newElem.classList.add(...className);
