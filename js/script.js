@@ -6,6 +6,8 @@ createLogo();
 createNavLinks();
 createLogin();
 createMainBlock();
+createSearch();
+createDishTypeDropDown();
 //createMainRecipeNewSection();
 
 function createWrapper() {
@@ -189,13 +191,16 @@ function createMainRecipeNewSection(data) {
     content: 'Try something new',
   };
   createElem(parentElemItemsTitle, optionsItemsTitle);
+
   const parentElemItemsBlock = document.querySelector('.new');
+
   const optionsItemsBlock = {
     type: 'div',
     className: ['new__items'],
   };
   createElem(parentElemItemsBlock, optionsItemsBlock);
-  for (let i = 0; i < 12; i++) {
+
+  for (let i = 0; i < data.length; i++) {
     createCard(i, data);
   }
 }
@@ -206,7 +211,9 @@ function createCard(i, data) {
     className: ['new__item'],
   };
   createElem(parentElem, options);
+
   const parentElemDiv = document.querySelectorAll('.new__item')[i];
+
   const optionsDiv = {
     type: 'div',
     className: ['new__img'],
@@ -215,21 +222,21 @@ function createCard(i, data) {
   const parentElemImg = document.querySelectorAll('.new__img')[i];
   const optionsImg = {
     type: 'img',
-    src: data.recipes[i].image,
+    src: data[i].image,
   };
   createElem(parentElemImg, optionsImg);
   const parentElemTitle = document.querySelectorAll('.new__item')[i];
   const optionsTitle = {
     type: 'p',
     className: ['new__title'],
-    content: data.recipes[i].title,
+    content: data[i].title,
   };
   createElem(parentElemTitle, optionsTitle);
   const parentElemDeskr = document.querySelectorAll('.new__item')[i];
   const optionsDeskr = {
     type: 'p',
     className: ['new__deskr'],
-    content: limitCharacters(removeHtmlTags(data.recipes[i].summary), 200),
+    content: limitCharacters(removeHtmlTags(data[i].summary), 200),
   };
   createElem(parentElemDeskr, optionsDeskr);
   const parentElemBtn = document.querySelectorAll('.new__item')[i];
@@ -243,12 +250,14 @@ function createCard(i, data) {
 async function getRecipeFromAPI(key, id) {
   //const url = `https://api.edamam.com/search?q=chicken&app_id=${id}&app_key=${key}`;
   //const limit = 9; // Здесь указываете желаемое количество рецептов
-  const url = `https://api.spoonacular.com/recipes/random?number=1000&apiKey=${key}`;
+  const url = `https://api.spoonacular.com/recipes/random?number=2000&apiKey=${key}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
-    createMainRecipeNewSection(data);
+    createMainRecipeNewSection(data.recipes);
+    //search(data.recipes);
+    filterByDishType(data.recipes);
     /*const categoriesWithImages = [];
     const uniqueCategories = new Set();
 
@@ -278,5 +287,127 @@ function limitCharacters(input, limit) {
 function removeHtmlTags(input) {
   return input.replace(/<[^>]*>?/gm, '');
 }
-getRecipeFromAPI(keyAPI.key);
+//getRecipeFromAPI(keyAPI.key);
 //getPopularCategoryFromAPI(keyAPI.key);
+function createSearch() {
+  const parentElem = document.querySelector('.main__container');
+  const options = {
+    type: 'section',
+    className: ['search'],
+  };
+  createElem(parentElem, options);
+  const parentElemForm = document.querySelector('.search');
+  const optionsForm = {
+    type: 'form',
+    className: ['search__form'],
+  };
+  createElem(parentElemForm, optionsForm);
+  const parentElemBlock = document.querySelector('.search__form');
+  const optionsBlock = {
+    type: 'div',
+    className: ['form-group', 'input-block'],
+  };
+  createElem(parentElemBlock, optionsBlock);
+  const parentElemLabel = document.querySelector('.form-group');
+  /*const optionsLabel = {
+    type: 'label',
+    forAttribute: 'search',
+  };
+  createElem(parentElemLabel, optionsLabel);*/
+
+  const optionsInput = {
+    type: 'input',
+    nameAttr: 'search',
+    className: ['search-input'],
+    placeholder: 'Search',
+    typeAttr: 'text',
+  };
+  createElem(parentElemLabel, optionsInput);
+  const optionsBtn = {
+    type: 'button',
+    className: ['form-btn'],
+  };
+  createElem(parentElemLabel, optionsBtn);
+
+  const parentElemI = document.querySelector('.form-btn');
+  const optionsI = {
+    type: 'i',
+    className: ['ph', 'ph-magnifying-glass'],
+  };
+  createElem(parentElemI, optionsI);
+}
+function search(data) {
+  const input = document.querySelector('.search-input');
+  const search = input.addEventListener('input', (e) => {
+    let result = data.filter((recipe) =>
+      recipe.title.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    console.log(result);
+
+    clearHtml('.new');
+    createMainRecipeNewSection(result);
+  });
+}
+function clearHtml(elem) {
+  document.querySelector(`${elem}`).innerHTML = '';
+}
+
+function createDishTypeDropDown() {
+  const variants = [
+    'Main course',
+    'Side dish',
+    'Dessert',
+    'Appetizer',
+    'Salad',
+    'Bread',
+    'Breakfast',
+    'Soup',
+    'Beverage',
+    'Sauce',
+    'Marinade',
+    'Fingerfood',
+    'Snack',
+    'Drink',
+  ];
+  const parentElemBlock = document.querySelector('.search__form');
+  const optionsBlock = {
+    type: 'div',
+    className: ['form-group', 'dropdown-cuisine'],
+  };
+  createElem(parentElemBlock, optionsBlock);
+  const parentElemLabel = document.querySelector('.dropdown-cuisine');
+  /* const optionsLabel = {
+    type: 'label',
+    forAttribute: 'cuisine',
+    content: 'Choose cuisine',
+  };
+  createElem(parentElemLabel, optionsLabel);*/
+  const optionsSelect = {
+    type: 'select',
+    nameAttr: 'cuisine',
+    id: 'cuisine',
+  };
+  createElem(parentElemLabel, optionsSelect);
+  const parentElemOption = document.querySelector('#cuisine');
+  for (let i = 0; i < variants.length; i++) {
+    const optionsOption = {
+      type: 'option',
+      value: variants[i],
+      content: variants[i],
+    };
+    createElem(parentElemOption, optionsOption);
+  }
+}
+function filterByDishType(data) {
+  const list = document.querySelector('#cuisine');
+  console.log(data);
+
+  list.addEventListener('change', (e) => {
+    let result = data.filter((recipe) =>
+      recipe.dishTypes.includes(e.target.value.toLowerCase())
+    );
+
+    clearHtml('.new');
+    createMainRecipeNewSection(result);
+  });
+}
