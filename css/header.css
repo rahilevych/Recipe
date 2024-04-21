@@ -1,0 +1,51 @@
+header {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url(..//img/bg.jpg);
+  background-size: cover; /* Масштабирование картинки так, чтобы она полностью покрывала контейнер */
+  background-position: center; /* Позиция картинки внутри контейнера */
+  background-repeat: no-repeat;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+h1 {
+  color: #633a39;
+  font-size: 5rem;
+  width: 50%;
+  height: 100%;
+  margin-top: 8rem;
+  margin-left: 5rem;
+  line-height: 7rem;
+}
+nav {
+  position: relative;
+  z-index: 1;
+}
+.nav__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.nav__wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 62px;
+}
+
+.nav__wave .shape-fill {
+  fill: rgb(235, 241, 214);
+}
