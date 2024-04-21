@@ -16,7 +16,83 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="wrapper"></div>
+    <div class="wrapper">
+      <header>
+        <nav class="nav__block">
+          <div class="container nav__container">
+            <div class="nav__logo"><i class="ph ph-fork-knife"></i></div>
+            <ul class="nav__list">
+              <li class="nav__item"><a href="" class="nav__link">Home</a></li>
+              <li class="nav__item">
+                <a href="" class="nav__link">Surprise Me</a>
+              </li>
+              <li class="nav__item">
+                <a href="" class="nav__link">Saved Recipes</a>
+              </li>
+              <li class="nav__login"></li>
+            </ul>
+            <div class="nav__login">
+              <i class="ph ph-user"></i>
+            </div>
+          </div>
+        </nav>
+        <div class="wave">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none">
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              class="shape-fill"></path>
+          </svg>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="container main__container">
+          <section class="search">
+            <form action="">
+              <div class="drop-list__block"></div>
+            </form>
+          </section>
+          <section class="new">
+            <div class="search__filter">
+              <div class="form__filter">
+                <div class="input-block">
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="Search"
+                    class="search-input" />
+                  <i class="ph ph-magnifying-glass search-icon"></i>
+                  <i class="ph ph-x close"></i>
+                </div>
+                <div class="filter__btn">
+                  <i class="ph ph-sliders"></i>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+      <footer>
+        <div class="container footer__container">
+          <ul class="footer__nav">
+            <li><a href="">Home</a></li>
+            <li><a href="">Surprise Me</a></li>
+            <li><a href="">Saved Recipes</a></li>
+          </ul>
+          <div class="footer__social">
+            <a><i class="ph ph-youtube-logo"></i></a>
+            <a><i class="ph ph-pinterest-logo"></i></a>
+            <a><i class="ph ph-twitter-logo"></i></a>
+            <a><i class="ph ph-instagram-logo"></i></a>
+            <a><i class="ph ph-tiktok-logo"></i></a>
+          </div>
+        </div>
+      </footer>
+    </div>
     <script src="./js/script.js" type="module"></script>
   </body>
 </html>
