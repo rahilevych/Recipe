@@ -1,6 +1,23 @@
 :root {
-  --main-bg-color: #d2c6c2;
-  --main-font-color: white;
+  /*--main-bg-color: #cfbcae;*/
+  /* --main-bg-color: #fe8535;*/
+  --main-bg-color: #d7e3ae;
+  /*--hover-color: #fdd021;*/
+  --hover-color: #b20000;
+
+  --main-font-color: #b20000;
+  --recipe-cuisine-color: #fe8535;
+  --recipe-dish-color: #a1acb4;
+  --light-font-color: white;
+  --grey-font-blue: #a1acb4;
+  --bg-dark: #675e5a;
+  --title-dark: #4f4745;
+  --border-dark: #4f4745;
+}
+body,
+html {
+  height: 100%;
+  margin: 0;
 }
 *,
 a,
@@ -12,9 +29,8 @@ ul {
   list-style: none;
   font-family: 'Josefin Sans', sans-serif;
   font-style: normal;
-  color: var(--main-font-color);
+  color: var(--light-font-color);
   text-decoration: none;
-  cursor: pointer;
 }
 @media only screen and (max-width: 1440px) {
   html {
