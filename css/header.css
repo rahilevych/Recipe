@@ -49,3 +49,58 @@ nav {
 .nav__wave .shape-fill {
   fill: rgb(235, 241, 214);
 }
+.nav__block {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  height: 5.6rem;
+  background-color: var(--main-bg-color);
+}
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 50%;
+  align-self: flex-end;
+  margin-left: 20rem;
+}
+.nav__list li > a {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.5s ease;
+}
+.nav__list li > a::after {
+  position: absolute;
+  content: '';
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--hover-color);
+  transition: width 0.5s ease;
+}
+.nav__list li > a:hover::after {
+  width: 100%;
+}
+.nav__list li > a:hover {
+  color: var(--hover-color);
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.nav__logo i {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+}
+.nav__login i {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  align-self: flex-end;
+}
