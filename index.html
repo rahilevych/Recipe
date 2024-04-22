@@ -20,7 +20,9 @@
       <header>
         <nav class="nav__block">
           <div class="container nav__container">
-            <div class="nav__logo"><i class="ph ph-fork-knife"></i></div>
+            <div class="nav__logo">
+              <i class="ph ph-fork-knife"></i>Cook&Eat
+            </div>
             <ul class="nav__list">
               <li class="nav__item"><a href="" class="nav__link">Home</a></li>
               <li class="nav__item">
@@ -36,7 +38,8 @@
             </div>
           </div>
         </nav>
-        <div class="wave">
+        <h1 class="title">Discover Global Tastes with Cook&Eat</h1>
+        <div class="nav__wave">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -51,28 +54,22 @@
 
       <main class="main">
         <div class="container main__container">
-          <section class="search">
+          <section class="filters">
             <form action="">
-              <div class="drop-list__block"></div>
+              <div class="filters__block"></div>
             </form>
           </section>
-          <section class="new">
-            <div class="search__filter">
-              <div class="form__filter">
-                <div class="input-block">
-                  <input
-                    type="text"
-                    name="search"
-                    placeholder="Search"
-                    class="search-input" />
-                  <i class="ph ph-magnifying-glass search-icon"></i>
-                  <i class="ph ph-x close"></i>
-                </div>
-                <div class="filter__btn">
-                  <i class="ph ph-sliders"></i>
-                </div>
-              </div>
+          <section class="recipe">
+            <div class="recipe__input">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search"
+                class="search-input" />
+              <i class="ph ph-magnifying-glass search-icon"></i>
+              <i class="ph ph-x close"></i>
             </div>
+            <div class="recipe__items"></div>
           </section>
         </div>
       </main>
