@@ -3,9 +3,9 @@
   /* --main-bg-color: #fe8535;*/
   --main-bg-color: #d7e3ae;
   /*--hover-color: #fdd021;*/
-  --hover-color: #b20000;
+  --hover-color: rgb(99, 58, 57);
 
-  --main-font-color: #b20000;
+  --main-font-color: rgb(99, 58, 57);
   --recipe-cuisine-color: #fe8535;
   --recipe-dish-color: #a1acb4;
   --light-font-color: white;
