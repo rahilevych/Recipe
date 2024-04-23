@@ -22,9 +22,9 @@ main {
 }
 .main__container {
   position: relative;
-  display: grid;
-  align-content: start;
-  grid-template-columns: 1fr 2fr;
+  display: flex;
+  flex-direction: column;
+
   background-color: white;
   border-radius: 20px;
   margin: 10rem auto;
@@ -32,7 +32,7 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 10rem 1rem;
+  padding: 0 1rem;
   height: 100%;
 }
 .main__container::before {
@@ -45,18 +45,46 @@ main {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 20px;
 }
+.recipe__filtering {
+  display: flex;
+
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+  padding: 5rem 8rem;
+  gap: 2rem;
+}
 
 .recipe {
-  margin-top: 6rem;
-  margin-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: 100%;
+  height: auto;
+}
+.recipe__no {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.recipe__no i {
+  font-size: 5rem;
+  color: black;
+}
+.recipe__no p {
+  color: black;
+  font-size: 3rem;
   height: 100%;
 }
 .recipe__items {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
@@ -146,14 +174,23 @@ main {
   font-size: 0.75rem;
   margin-top: 1rem;
 }
-
+.recipe__search {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8rem;
+  padding-top: 8rem;
+}
 .recipe__input {
   position: relative;
+
   display: flex;
   flex-direction: row;
   right: 0;
   height: 2.5rem;
-  width: 25rem;
+  width: 30rem;
   border: none;
   background-color: none;
   border-bottom: 1px solid black;
@@ -174,43 +211,65 @@ main {
 
 .recipe__input .search-icon {
   position: absolute;
-  right: 1rem;
+  right: 0;
   top: 0.6rem;
-  color: rgba(178, 0, 0, 0.8);
+  color: rgb(99, 58, 57);
   font-size: 1.5rem;
   font-weight: 500;
   border: none;
 }
-.recipe__input.close {
+.recipe__input .close {
   display: none;
   cursor: pointer;
   position: absolute;
   top: 0.6rem;
-  color: rgba(178, 0, 0, 0.8);
+  color: rgb(99, 58, 57);
   font-size: 1.5rem;
   font-weight: 500;
   border: none;
-  left: 1rem;
+  left: 0;
 }
+.recipe__pagination {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.recipe__pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
 .filters {
   display: flex;
   align-items: start;
-  justify-content: center;
-  width: 100%;
-
+  justify-content: start;
+  width: 40%;
   height: 100%;
+}
+.arrow {
+  cursor: pointer;
 }
 .filters__block {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   width: 100%;
   gap: 2rem;
   padding: 5rem;
   box-shadow: rgba(99, 58, 57, 0.5) 0px 5px 15px;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #fff;
 }
 
@@ -225,7 +284,8 @@ main {
 .filter__group p {
   color: black;
 }
-.filter__group label {
+.filter__cuisines label,
+.filter__dishes label {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -248,6 +308,15 @@ main {
 }
 .filter-title i {
   color: black;
+}
+.filter__cuisines,
+.filter__dishes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 1rem;
 }
 
 footer {
@@ -285,7 +354,7 @@ footer {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: var(--main-font-color);
+  background-color: rgb(99, 58, 57);
   border: 1px solid white;
   cursor: pointer;
 }
