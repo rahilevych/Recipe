@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script
+      src="https://kit.fontawesome.com/c955956440.js"
+      crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -25,9 +28,7 @@
             </div>
             <ul class="nav__list">
               <li class="nav__item"><a href="" class="nav__link">Home</a></li>
-              <li class="nav__item">
-                <a href="" class="nav__link">Surprise Me</a>
-              </li>
+
               <li class="nav__item">
                 <a href="" class="nav__link">Saved Recipes</a>
               </li>
@@ -54,30 +55,35 @@
 
       <main class="main">
         <div class="container main__container">
-          <section class="filters">
-            <form action="">
-              <div class="filters__block"></div>
-            </form>
-          </section>
-          <section class="recipe">
+          <section class="recipe__search">
             <div class="recipe__input">
               <input
                 type="text"
                 name="search"
-                placeholder="Search"
+                placeholder="Search by title"
                 class="search-input" />
               <i class="ph ph-magnifying-glass search-icon"></i>
               <i class="ph ph-x close"></i>
             </div>
-            <div class="recipe__items"></div>
           </section>
+
+          <div class="recipe__filtering">
+            <section class="filters">
+              <form action="">
+                <div class="filters__block"></div>
+              </form>
+            </section>
+            <section class="recipe">
+              <div class="recipe__items"></div>
+            </section>
+          </div>
         </div>
       </main>
       <footer>
         <div class="container footer__container">
           <ul class="footer__nav">
             <li><a href="">Home</a></li>
-            <li><a href="">Surprise Me</a></li>
+
             <li><a href="">Saved Recipes</a></li>
           </ul>
           <div class="footer__social">
