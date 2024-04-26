@@ -1,4 +1,9 @@
 header {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: space-between;
   position: relative;
   width: 100%;
   height: 100vh;
@@ -17,13 +22,41 @@ header::before {
   background-color: rgba(0, 0, 0, 0.1);
 }
 h1 {
-  color: #633a39;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  color: white;
   font-size: 5rem;
-  width: 50%;
-  height: 100%;
-  margin-top: 8rem;
-  margin-left: 5rem;
+  width: 70%;
+
+  margin: 0 auto;
   line-height: 7rem;
+  text-align: center;
+
+  -webkit-text-stroke: 3px var(--main-color);
+}
+
+.to__recipes {
+  position: relative;
+  margin: 0 auto;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  bottom: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+  width: 5.5rem;
+  height: 5.5rem;
+}
+.to__recipes i {
+  font-size: 5rem;
+  font-weight: 400;
+  color: var(--main-color);
 }
 nav {
   position: relative;
@@ -47,60 +80,26 @@ nav {
 }
 
 .nav__wave .shape-fill {
-  fill: rgb(235, 241, 214);
+  fill: var(--green-light-color);
 }
 .nav__block {
   flex-shrink: 0;
   width: 100%;
   height: 100%;
-  height: 5.6rem;
-  background-color: var(--main-bg-color);
+  height: 4rem;
+  background-color: var(--green-dark-color);
 }
-.nav__list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  width: 50%;
-  align-self: flex-end;
-  margin-left: 20rem;
-}
-.nav__list li > a {
-  position: relative;
-  cursor: pointer;
-  transition: color 0.5s ease;
-}
-.nav__list li > a::after {
-  position: absolute;
-  content: '';
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--hover-color);
-  transition: width 0.5s ease;
-}
-.nav__list li > a:hover::after {
-  width: 100%;
-}
-.nav__list li > a:hover {
-  color: var(--hover-color);
-}
+
 .nav__logo {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
+
   gap: 0.5rem;
 }
-.nav__logo i {
+.nav__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100%;
-  font-size: 1.5rem;
-}
-.nav__login i {
-  width: 100%;
-  height: 100%;
-  font-size: 1.5rem;
-  align-self: flex-end;
 }
