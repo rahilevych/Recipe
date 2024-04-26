@@ -5,7 +5,7 @@
   height: fit-content;
   display: flex;
   flex-direction: column;
-  background-color: rgb(235, 241, 214);
+  background-color: var(--green-light-color);
 }
 .container {
   margin: 0 auto;
@@ -27,7 +27,7 @@ main {
 
   background-color: white;
   border-radius: 20px;
-  margin: 10rem auto;
+  margin: 5rem auto;
   background-image: url(../img/bg2.jpg);
   background-size: cover;
   background-position: center;
@@ -47,22 +47,80 @@ main {
 }
 .recipe__filtering {
   display: flex;
-
+  align-items: center;
   justify-content: space-between;
 
   width: 100%;
   height: 100%;
-  padding: 5rem 8rem;
+  padding: 5rem 4rem;
   gap: 2rem;
+}
+
+.loader {
+  display: none;
+  color: var(--green-dark-color);
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+@keyframes mltShdSpin {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@keyframes round {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .recipe {
   display: flex;
+  align-self: flex-start;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-
-  width: 100%;
   height: auto;
+  width: 100%;
 }
 .recipe__no {
   display: flex;
@@ -82,9 +140,10 @@ main {
 }
 .recipe__items {
   display: flex;
+
   flex-direction: row;
-  align-items: start;
-  justify-content: space-between;
+  flex: 1 0 auto;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
@@ -97,7 +156,7 @@ main {
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
-  width: 14rem;
+  width: 12rem;
   height: 20rem;
   border: none;
   border-radius: 10px;
@@ -155,12 +214,12 @@ main {
   content: '';
   bottom: -10px;
   left: 37.5%;
-  background-color: var(--recipe-cuisine-color);
+  background-color: var(--green-dark-color);
   height: 1px;
 }
 .recipe__cuisine {
   width: 90%;
-  color: var(--recipe-cuisine-color);
+  color: var(--green-dark-color);
   overflow-wrap: break-word;
   text-align: center;
   text-transform: uppercase;
@@ -180,8 +239,8 @@ main {
   height: 100%;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 8rem;
-  padding-top: 8rem;
+  padding: 0 5rem;
+  padding-top: 5rem;
 }
 .recipe__input {
   position: relative;
@@ -213,7 +272,7 @@ main {
   position: absolute;
   right: 0;
   top: 0.6rem;
-  color: rgb(99, 58, 57);
+  color: var(--main-color);
   font-size: 1.5rem;
   font-weight: 500;
   border: none;
@@ -223,7 +282,7 @@ main {
   cursor: pointer;
   position: absolute;
   top: 0.6rem;
-  color: rgb(99, 58, 57);
+  color: var(--main-color);
   font-size: 1.5rem;
   font-weight: 500;
   border: none;
@@ -244,15 +303,26 @@ main {
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  color: black;
-  border: 1px solid black;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 50%;
   cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.recipe__pagination-btn:hover {
+  background-color: #d5e0b0;
+  cursor: pointer;
+}
+.active {
+  background-color: var(--green-dark-color);
+  color: white;
 }
 
 .filters {
   display: flex;
   align-items: start;
   justify-content: start;
+  align-self: flex-start;
   width: 40%;
   height: 100%;
 }
@@ -267,10 +337,14 @@ main {
   justify-content: center;
   width: 100%;
   gap: 2rem;
-  padding: 5rem;
+  padding: 2rem;
   box-shadow: rgba(99, 58, 57, 0.5) 0px 5px 15px;
   border-radius: 10px;
   background-color: #fff;
+}
+.filter__block {
+  height: 10rem;
+  overflow-y: auto;
 }
 
 .filter__group {
@@ -280,17 +354,19 @@ main {
   align-items: start;
   justify-content: start;
   gap: 1rem;
+  width: 100%;
 }
 .filter__group p {
   color: black;
 }
+
 .filter__cuisines label,
-.filter__dishes label {
+.filter__dishs label {
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  color: rgb(99, 58, 57);
+  color: var(--main-color);
 }
 
 .filter__group input {
@@ -302,21 +378,22 @@ main {
 .filter-title {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
   color: black;
 }
 .filter-title i {
   color: black;
 }
 .filter__cuisines,
-.filter__dishes {
+.filter__dishs {
   position: relative;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: start;
-  justify-content: start;
+  justify-content: space-between;
   gap: 1rem;
+  width: 100%;
 }
 
 footer {
@@ -324,8 +401,8 @@ footer {
   flex-shrink: 0;
   margin-top: auto;
   width: 100%;
-  height: 15rem;
-  background-color: var(--main-bg-color);
+  height: 10rem;
+  background-color: var(--green-dark-color);
 }
 .footer__container {
   position: relative;
@@ -335,11 +412,7 @@ footer {
   justify-content: center;
   gap: 3rem;
 }
-.footer__nav {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-}
+
 .footer__social {
   position: relative;
   display: flex;
@@ -354,21 +427,100 @@ footer {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: rgb(99, 58, 57);
-  border: 1px solid white;
+  background-color: var(--green-light-color);
+  border: 1px solid var(--main-color);
   cursor: pointer;
 }
 .footer__social > a > i {
-  transition: color 0.5s ease;
+  transition: 0.5s ease;
+  color: var(--main-color);
 }
 
-.footer__social > a > i:hover {
-  color: var(--hover-color);
-}
-.footer__ nav li > a {
-  transition: color 0.5s ease;
+.footer__social a :hover {
+  transform: scale(1.1);
 }
 
-.footer__nav li > a:hover {
-  color: var(--hover-color);
+@media only screen and (max-width: 1250px) {
+  .container {
+    width: 90%;
+  }
+  /* .recipe {
+    justify-content: center;
+  }*/
+  .recipe__input {
+    width: 70%;
+  }
+  .recipe__search {
+    justify-content: center;
+    padding: 0;
+    padding-top: 3rem;
+  }
+  .recipe__items {
+    justify-content: center;
+  }
+  .recipe__filtering {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filters {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+  }
+  .filters__block {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    gap: 3rem;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 1rem;
+  }
+  .filter__block {
+    position: relative;
+    z-index: 2;
+    display: none;
+    overflow-y: auto;
+    height: 10rem;
+    background-color: white;
+  }
+  .filter__group {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  header {
+    height: auto;
+  }
+  h1 {
+    font-size: 3rem;
+    padding-bottom: 10rem;
+    line-height: 4rem;
+  }
+  .to-search {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .recipe__filtering {
+    padding: 1rem 0;
+  }
+  .filters__block {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 460px) {
+  .recipe__item {
+    width: 90%;
+    height: 20rem;
+  }
 }
