@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script
-      src="https://kit.fontawesome.com/c955956440.js"
-      crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -26,20 +23,13 @@
             <div class="nav__logo">
               <i class="ph ph-fork-knife"></i>Cook&Eat
             </div>
-            <ul class="nav__list">
-              <li class="nav__item"><a href="" class="nav__link">Home</a></li>
-
-              <li class="nav__item">
-                <a href="" class="nav__link">Saved Recipes</a>
-              </li>
-              <li class="nav__login"></li>
-            </ul>
-            <div class="nav__login">
-              <i class="ph ph-user"></i>
-            </div>
           </div>
         </nav>
-        <h1 class="title">Discover Global Tastes with Cook&Eat</h1>
+        <h1 class="title">Discover global tastes with Cook&Eat</h1>
+        <div class="to__recipes">
+          <i class="ph ph-caret-down to-search"></i>
+        </div>
+
         <div class="nav__wave">
           <svg
             data-name="Layer 1"
@@ -55,7 +45,7 @@
 
       <main class="main">
         <div class="container main__container">
-          <section class="recipe__search">
+          <section class="recipe__search" id="search">
             <div class="recipe__input">
               <input
                 type="text"
@@ -69,9 +59,7 @@
 
           <div class="recipe__filtering">
             <section class="filters">
-              <form action="">
-                <div class="filters__block"></div>
-              </form>
+              <div class="filters__block"></div>
             </section>
             <section class="recipe">
               <div class="recipe__items"></div>
@@ -81,11 +69,6 @@
       </main>
       <footer>
         <div class="container footer__container">
-          <ul class="footer__nav">
-            <li><a href="">Home</a></li>
-
-            <li><a href="">Saved Recipes</a></li>
-          </ul>
           <div class="footer__social">
             <a><i class="ph ph-youtube-logo"></i></a>
             <a><i class="ph ph-pinterest-logo"></i></a>
