@@ -1,9 +1,7 @@
 :root {
-  /*--main-bg-color: #cfbcae;*/
-  /* --main-bg-color: #fe8535;*/
-  --main-bg-color: #d7e3ae;
-  /*--hover-color: #fdd021;*/
-  --hover-color: rgb(99, 58, 57);
+  --green-dark-color: #bed769;
+  --green-light-color: rgb(235, 241, 214);
+  --main-color: rgb(99, 58, 57);
 
   --main-font-color: rgb(99, 58, 57);
   --recipe-cuisine-color: #fe8535;
