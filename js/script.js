@@ -5,8 +5,8 @@ controller(keyAPI.key);
 async function getRecipeFromAPI(key) {
   try {
     const url = `https://api.spoonacular.com/recipes/random?number=150&apiKey=${key}`;
-    //const response = await fetch(url);
-    const response = await fetch('../data.json');
+    const response = await fetch(url);
+    //const response = await fetch('../data.json');
     const data = await response.json();
 
     if (!response.ok) {
@@ -41,13 +41,16 @@ async function controller(key) {
 
     createDishCheckbox(newDataArr);
     createCuisineCheckbox(newDataArr);
+    createDietsCheckbox(newDataArr);
     clickArrow('.arrow__dish', '.filter__dishs');
     clickArrow('.arrow__cuisine', '.filter__cuisines');
+    clickArrow('.arrow__diet', '.filter__diets');
 
     showLimitedItemsProPage(newDataArr, 1);
     searchByTitle(newDataArr);
     filterByDishType(newDataArr);
     filterByCuisine(newDataArr);
+    filterByDiets(newDataArr);
   }
   goToSearch();
   clearInput();
@@ -123,6 +126,7 @@ function searchByTitle(data) {
   const closeBtn = document.querySelector('.close');
   const checkboxesDish = document.querySelectorAll('input[name="dish"]');
   const checkboxesCuisine = document.querySelectorAll('input[name="cuisine"]');
+  const checkboxesDiet = document.querySelectorAll('input[name="diet"]');
 
   searchInput.addEventListener('input', () => {
     let result = data.filter((recipe) =>
@@ -133,6 +137,9 @@ function searchByTitle(data) {
     });
 
     checkboxesCuisine.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+    checkboxesDiet.forEach((checkbox) => {
       checkbox.checked = false;
     });
 
@@ -176,6 +183,10 @@ function createListUniqueDish(data) {
 
 function createListUniqueCuisines(data) {
   return createUniqueListVariants(data, 'cuisines');
+}
+
+function createListUniqueDiets(data) {
+  return createUniqueListVariants(data, 'diets');
 }
 
 function createCheckboxGroup(data, groupClass, titleText, nameAttr) {
@@ -226,6 +237,11 @@ function createCuisineCheckbox(data) {
   createCheckboxGroup(variants, 'cuisine', 'Choose cuisine', 'cuisine');
 }
 
+function createDietsCheckbox(data) {
+  const variants = createListUniqueDiets(data);
+  createCheckboxGroup(variants, 'diet', 'Choose diets', 'diet');
+}
+
 function clickArrow(arrowClass, filterBlockClass) {
   const arrow = document.querySelector(arrowClass);
   const filterBlock = document.querySelector(filterBlockClass);
@@ -245,12 +261,22 @@ function filterByDishType(data) {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
       applyFilters(data);
+
+      //createChosenFilter(checkbox.value);
     });
   });
 }
 
 function filterByCuisine(data) {
   const checkboxes = document.querySelectorAll('input[name="cuisine"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      applyFilters(data);
+    });
+  });
+}
+function filterByDiets(data) {
+  const checkboxes = document.querySelectorAll('input[name="diet"]');
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
       applyFilters(data);
@@ -265,7 +291,10 @@ function applyFilters(data) {
   const selectedCuisines = Array.from(
     document.querySelectorAll('input[name="cuisine"]:checked')
   ).map((checkbox) => checkbox.value);
-
+  const selectedDiets = Array.from(
+    document.querySelectorAll('input[name="diet"]:checked')
+  ).map((checkbox) => checkbox.value);
+  console.log(selectedDiets);
   const result = data.filter(
     (recipe) =>
       (!selectedDishTypes.length ||
@@ -273,7 +302,11 @@ function applyFilters(data) {
           recipe.dishTypes.includes(dishType)
         )) &&
       (!selectedCuisines.length ||
-        selectedCuisines.some((cuisine) => recipe.cuisines.includes(cuisine)))
+        selectedCuisines.some((cuisine) =>
+          recipe.cuisines.includes(cuisine)
+        )) &&
+      (!selectedDiets.length ||
+        selectedDiets.some((diet) => recipe.diets.includes(diet)))
   );
 
   if (result.length > 0) {
@@ -361,3 +394,43 @@ function showLimitedItemsProPage(data, index) {
   clearHtml('.recipe__items');
   createRecipeItem(arr);
 }
+/*
+function createChosenFilter(value) {
+  const filters = document.querySelector('.filters__block');
+  let chosenFiltersBlock = document.querySelector('.filters__chosen');
+
+  if (!chosenFiltersBlock) {
+    chosenFiltersBlock = document.createElement('div');
+    chosenFiltersBlock.classList.add('filters__chosen');
+    filters.appendChild(chosenFiltersBlock);
+  }
+  const filter = document.createElement('div');
+  filter.classList.add('filter__block-chosen');
+  filter.setAttribute('value', value);
+  chosenFiltersBlock.appendChild(filter);
+
+  const p = document.createElement('p');
+  p.classList.add('chosen__filter');
+  p.textContent = value;
+  filter.appendChild(p);
+
+  const i = document.createElement('i');
+  i.classList.add('ph', 'ph-x', 'clear-filter');
+
+  filter.appendChild(i);
+  clearFilter(value);
+}
+function clearFilter(value) {
+  const filter = document.querySelectorAll(`div[value="${value}"]`)[0];
+
+  filter.addEventListener('click', () => {
+    filter.remove();
+    const checkboxesDish = document.querySelectorAll('input[name="dish"]');
+    checkboxesDish.forEach((checkbox) => {
+      if (filter === value) {
+        checkbox.checked = false;
+      }
+    });
+  });
+}
+*/

@@ -97,6 +97,9 @@ nav {
 
   gap: 0.5rem;
 }
+.nav__logo i {
+  color: white;
+}
 .nav__container {
   display: flex;
   align-items: center;
