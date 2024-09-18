@@ -1,4 +1,4 @@
-import { KEY } from '../config/keyAPI.js';
+const KEY = 'd5cf441e972845a2a6ae915a2c114edc';
 
 controller(KEY);
 
