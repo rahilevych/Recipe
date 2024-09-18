@@ -1,6 +1,6 @@
 require('dotenv').config();
 const keyAPI = process.env.KEY;
-controller(keyAPI.key);
+controller(keyAPI);
 
 async function getRecipeFromAPI(key) {
   try {
