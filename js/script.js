@@ -1,5 +1,5 @@
-import * as keyAPI from '../config/keyAPI.js';
-
+require('dotenv').config();
+const keyAPI = process.env.KEY;
 controller(keyAPI.key);
 
 async function getRecipeFromAPI(key) {
